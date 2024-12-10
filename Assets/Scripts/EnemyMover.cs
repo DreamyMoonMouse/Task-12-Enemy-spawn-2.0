@@ -9,7 +9,8 @@ public class EnemyMover : MonoBehaviour
 
     private void Update()
     {
-        if (_target == null) return;
+        if (_target == null) 
+            return;
         
         Vector3 direction = (_target.position - transform.position).normalized;
         transform.position += direction * _speed * Time.deltaTime;

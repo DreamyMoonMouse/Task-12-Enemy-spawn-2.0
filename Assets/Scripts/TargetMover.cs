@@ -10,15 +10,16 @@ public class TargetMover : MonoBehaviour
 
     private void Update()
     {
-        if (_waypoints.Length == 0) return;
+        if (_waypoints.Length == 0)
+            return;
 
         Transform targetWaypoint = _waypoints[_currentWaypointIndex];
         Vector3 direction = (targetWaypoint.position - transform.position).normalized;
         transform.position += direction * _speed * Time.deltaTime;
         
-        if (Vector3.Distance(transform.position, targetWaypoint.position) <= _arrivalThreshold)
+        if ((targetWaypoint.position - transform.position).sqrMagnitude <= _arrivalThreshold * _arrivalThreshold)
         {
-            _currentWaypointIndex = (_currentWaypointIndex + 1) % _waypoints.Length;
+            _currentWaypointIndex = ++_currentWaypointIndex % _waypoints.Length;
         }
     }
 }
